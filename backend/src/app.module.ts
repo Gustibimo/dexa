@@ -5,7 +5,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {databaseConfig} from "./config/database.config";
+import { AuthModule } from './auth/auth.module';
+import { EmployeesModule } from './employees/employees.module';
+import { AttendanceModule } from './attendance/attendance.module';
+import { databaseConfig } from './config/database.config';
 
 @Module({
   imports: [
@@ -15,6 +18,9 @@ import {databaseConfig} from "./config/database.config";
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',
     }),
+    AuthModule,
+    EmployeesModule,
+    AttendanceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
