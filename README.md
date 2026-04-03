@@ -289,3 +289,36 @@ dexa/
 └── docs/
     └── TECHNICAL_IMPLEMENTATION_PLAN.md
 ```
+
+### 16. User interface
+
+### Employee Profile
+
+![alt text](image.png)
+Edit form
+![alt text](image-6.png)
+#### toast message
+![alt text](image-5.png)
+
+### Attendance (Clock-in/Clock-out)
+![alt text](image-1.png)
+
+
+### Attendance Summary
+![alt text](image-4.png)
+#### Date picker
+![alt text](image-2.png)
+
+### Admin HR
+#### Employee list
+![alt text](image-7.png)
+#### Add employee form
+![alt text](image-8.png)
+#### Edit Employee (edit, reset password, deactivate)
+![alt text](image-9.png)
+
+#### Attendance log
+![alt text](image-10.png)
+
+#### Notification
+![alt text](image-11.png)
