@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Project tooling
+.github/
+.specify/
+.claude/
+specs/
+
+# Uploads
+uploads/
+
+# Coverage
+coverage/
+
+# TypeORM
+*.sqlite
+
+# Docker volumes
+mysql_data/
