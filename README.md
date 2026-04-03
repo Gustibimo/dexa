@@ -322,3 +322,36 @@ Edit form
 
 #### Notification
 ![alt text](image-11.png)
+
+### How to Run
+
+#### Backend
+
+BE needs to connect to MySQL and Kafka. Start those first via Docker Compose:
+
+```bash
+docker-compose up -d
+```
+
+API server
+
+```bash
+cd backend
+npm install
+npm run seed
+npm run start:dev
+```
+
+#### Frontend
+
+```bash
+# Employee App
+cd frontend/employee-app
+npm install
+npm run dev
+
+# Admin App
+cd ../admin-app
+npm install
+npm run dev
+```
