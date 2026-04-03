@@ -1,8 +1,19 @@
-# Technical Implementation Plan — Employee Attendance System
+# Technical Implementation — Employee Attendance System
 
 ## 1. Overview
 
 An employee attendance management system with two frontend apps (Admin & Employee) backed by a NestJS API, MySQL database, Kafka message broker for event-driven audit logging and real-time notifications via SSE.
+
+---
+
+## 1.2. Assumptions
+
+1. **Clock in/out validation**: No strict requirement of clock in/out order or limits on sessions per day. Business logic allows multiple sessions, but frontend can warn about unusual patterns (e.g., clocking out without clocking in).
+2. **File-based audit log**: Acceptable for prototype case. Not suitable for production — would need a dedicated audit DB or log aggregation service.
+3.  **No rate limiting**: Clock in/out endpoints have no throttling. Assumes trusted internal network.
+4.  **No soft delete**: Employee deletion cascades to attendance records.
+5.  **Notification**: Both profile changes and attendance events are sent to Kafka. Notifications module filters and forwards only actionable events (late clock-in, early leave) to SSE clients. Routine events are still recorded in the audit log file.
+6.  **Admin-only notifications**: Only admins receive real-time notifications. Employees can see their own profile change events in the audit log but do not receive push notifications for attendance events.
 
 ---
 
@@ -233,20 +244,6 @@ Admin notifications are **filtered for actionable events only** — routine cloc
 | kafka   | apache/kafka:3.7.0 | 9092  | KRaft mode (no Zookeeper). Auto-create topics enabled. |
 
 Backend and frontends run locally (not containerized).
-
----
-
-## 13. Assumptions
-
-1. **Single instance deployment**: No horizontal scaling considerations. Kafka consumer groups are per-module, not per-instance.
-2. **File-based audit log**: Acceptable for current scale. Not suitable for production — would need a dedicated audit DB or log aggregation service.
-3. **TypeORM synchronize: true**: Schema auto-sync in non-production. Production should use migrations.
-4. **No rate limiting**: Clock in/out endpoints have no throttling. Assumes trusted internal network.
-5. **CORS open**: `app.enableCors()` with no origin restriction. Should be locked down for production.
-6. **JWT secret fallback**: `process.env.JWT_SECRET || 'fallback-secret'` — the fallback must never be used in production.
-7. **No soft delete**: Employee deletion cascades to attendance records.
-8. **No timezone handling**: Dates use server timezone (`new Date().toISOString().split('T')[0]`).
-9. **SSE token via query param**: Required because browser `EventSource` API doesn't support custom headers.
 
 ---
 
