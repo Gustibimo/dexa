@@ -11,6 +11,7 @@ import { AttendanceModule } from './attendance/attendance.module';
 import { databaseConfig } from './config/database.config';
 import { KafkaModule } from './kafka/kafka.module';
 import { AuditModule } from './audit/audit.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AuditModule } from './audit/audit.module';
     EmployeesModule,
     AttendanceModule,
     AuditModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
